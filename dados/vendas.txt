@@ -1,0 +1,101 @@
+DROP database IF EXISTS vendas;
+
+CREATE DATABASE vendas;
+
+USE vendas;
+
+
+DROP TABLE IF EXISTS clientes cacade;
+
+CREATE TABLE clientes (
+    codigo int NOT NULL AUTO_INCREMENT,
+    nome   varchar(200) NOT NULL,
+    cidade varchar(100),
+    uf     varchar(2),
+    PRIMARY KEY (codigo)
+);
+CREATE INDEX idx_clientes_codigo ON clientes(codigo);
+
+INSERT INTO clientes (nome,cidade, uf) VALUES ('JOÃO MARIA JOSÉ','FORTALEZA', 'CE');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('FRANCISCO DA SILVA','FORTALEZA', 'CE');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('ELIAS MAIA ','FORTALEZA', 'CE');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('JOÃO DA SILVA','FORTALEZA', 'CE');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('APARECIDA COSTA','FORTALEZA', 'CE');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('DEBORA MAIA','FORTALEZA', 'CE');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('FERNANDA DA SILVA COSTA','SÃO PAULO', 'SP');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('FIRMINDO DA SILVA','FORTALEZA', 'CE');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('LUCAS LIMA','RIO DE JANEIRO', 'RJ');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('ROBERTO CARLOS','SÃO PAULO', 'SP');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('ANA MARIA BRAGA','SÃO PAULO', 'SP');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('FERNANDA VASCONCELOS','SÃO PAULO', 'SP');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('IVANILDE DA COSTA BARROS','FORTALEZA', 'CE');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('DOUGLAS BASTOS','FORTALEZA', 'CE');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('ESCARLETE DA FONSECA','FORTALEZA', 'CE');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('KATIA CARVALHO','FORTALEZA', 'CE');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('MARIA JOSE','FORTALEZA', 'CE');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('MARIA DAS GRAÇAS DA SILVA COSTA','SÃO PAULO', 'SP');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('HENRI CASTELLLI','RIO DE JANEIRO', 'SP');
+INSERT INTO clientes (nome,cidade, uf) VALUES ('JOSÉ DA SILVA COSTA','FORTALEZA', 'CE');
+
+select * from clientes;
+
+DROP TABLE IF EXISTS produtos cacade;
+
+CREATE TABLE produtos (
+    codigo int NOT NULL AUTO_INCREMENT,
+    descricao   varchar(200) NOT NULL,
+    valor_venda numeric(10,2) default(0),
+    PRIMARY KEY (codigo)
+);
+CREATE INDEX idx_produtos_codigo ON produtos(codigo);
+CREATE INDEX idx_produtos_descricao ON produtos(descricao);
+
+INSERT INTO produtos (descricao,valor_venda) VALUES ('SABONETE DOVE',2.50);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('DESODORANTE DOVE',7.50);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('SHAMPO DOVE',9);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('ESCOVA DE DENTES INFANTIL DISNEY',5.40);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('DESIFETANTE ALOUE JASMIN',5.60);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('DESIFETANTE ALOUE PERSEGO',5.60);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('DESIFETANTE ALOUE ALOI VERA',5.60);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('DESIFETANTE ALOUE ALOI IGUATEMI',2.50);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('PAPEL HIGIENICO FOFO PLUS',8);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('SABONETE REXONA',2.50);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('SABONETE ALMA DE FLORES',4.30);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('ESCOVA DE CABELO',2.50);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('PENTE',2.50);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('SABÃO OMO 2KG',8.50);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('SABÃO LIQUIDO OMO',10);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('DETERGENTE IPY MAÇÃ',2.50);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('DETERGENTE IPY LIMÃO',2.50);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('DETERGENTE IPY COCO',2.50);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('PAPEL TOALHA',5);
+INSERT INTO produtos (descricao,valor_venda) VALUES ('LIMPADOR DE VIDROS IPY',7.50);
+
+select * from produtos;
+
+DROP TABLE IF EXISTS pedidos cacade;
+
+CREATE TABLE pedidos (
+    codigo int NOT NULL AUTO_INCREMENT,
+    cliente_codigo int NOT NULL,
+    valor_total numeric(10,2) default(0),
+	data_emissao date,
+    PRIMARY KEY (codigo),
+    foreign key (cliente_codigo) references clientes(codigo)
+);
+CREATE INDEX idx_pedidos_codigo ON pedidos(codigo);
+
+DROP TABLE IF EXISTS pedidos_itens cacade;
+
+CREATE TABLE pedidos_itens (
+    codigo int NOT NULL AUTO_INCREMENT,
+    pedidos_codigo int NOT NULL,
+    produtos_codigo int NOT NULL,
+    valor_unitario numeric(10,2) NOT NULL,
+    valor_total    numeric(10,2) NOT NULL,
+    PRIMARY KEY (codigo),
+    foreign key (produtos_codigo) references produtos(codigo),
+    foreign key (pedidos_codigo) references pedidos(codigo)
+);
+CREATE INDEX idx_pedidos_itens_codigo ON pedidos_itens(codigo);
+

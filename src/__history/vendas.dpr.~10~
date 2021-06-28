@@ -1,0 +1,24 @@
+program vendas;
+
+uses
+  Vcl.Forms,
+  u_admPrincipal in '..\view\u_admPrincipal.pas' {admPrincipal},
+  u_dicionarioDados in '..\funcoes e classes\u_dicionarioDados.pas',
+  u_funcoes in '..\funcoes e classes\u_funcoes.pas',
+  u_configBanco in '..\controller\u_configBanco.pas',
+  u_connection in '..\controller\u_connection.pas',
+  u_PersistentObject in '..\controller\u_PersistentObject.pas',
+  u_Atributo in '..\controller\u_Atributo.pas',
+  u_cadBasico in '..\view\u_cadBasico.pas' {cadBasico},
+  u_cadProdutos in '..\view\u_cadProdutos.pas' {cadProdutos},
+  u_cadClientes in '..\view\u_cadClientes.pas' {cadClientes};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TadmPrincipal, admPrincipal);
+  Application.CreateForm(TcadClientes, cadClientes);
+  Application.Run;
+end.

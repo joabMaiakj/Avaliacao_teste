@@ -1,0 +1,29 @@
+unit u_cadProdutos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, u_cadBasico, Data.DB, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.Actions, Vcl.ActnList,
+  System.ImageList, Vcl.ImgList, Vcl.Menus, Vcl.Mask, Vcl.DBCtrls, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TcadProdutos = class(TcadBasico)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  cadProdutos: TcadProdutos;
+
+implementation
+
+{$R *.dfm}
+
+end.
